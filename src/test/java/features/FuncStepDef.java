@@ -7,7 +7,6 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -30,7 +29,7 @@ public class FuncStepDef {
 
     public WebDriver driver;
     public LoginPage loginPage;// = new LoginPage();
-    private HomePage homePage;
+    private DashboardPage dashboardPage;
     private SearchResultPage searchResultPage;
     private Basketpage basketpage;
     ExtentReports report;
@@ -53,19 +52,19 @@ public class FuncStepDef {
     @Given("^I am logged in user$")
     public void i_am_logged_in_user() throws Throwable {
         loginPage = new LoginPage();
-        homePage = loginPage.login(AutomationConstants.USERNAME,AutomationConstants.PASSWORD);
+        dashboardPage = loginPage.login(AutomationConstants.USERNAME,AutomationConstants.PASSWORD);
 
     }
 
 
     @Then("^the Subject should be \"(.*?)\"$")
     public void the_Subject_should_be(String arg1) throws Throwable {
-        Assert.assertTrue(homePage.checkHeader(arg1));
+        Assert.assertTrue(dashboardPage.checkHeader(arg1));
     }
 
     @Then("^the Subject should be \"(.*?)\" and fail$")
     public void the_Subject_should_be_fail(String arg1) throws Throwable {
-        Assert.assertFalse(homePage.checkHeader(arg1));
+        Assert.assertFalse(dashboardPage.checkHeader(arg1));
     }
 
 
@@ -86,50 +85,50 @@ public class FuncStepDef {
     @Then("^the page should be opened$")
     public void the_page_should_be_opened() throws Throwable {
 
-        homePage = new HomePage();
+        dashboardPage = new DashboardPage();
     }
 
     @And("^the brand name should be shown as \"([^\"]*)\"$")
     public void the_brand_name_should_be_shown_brand_name_in_header_as(String header) throws Throwable {
 
-        VerifyUtils.True("Checking if user can see header",homePage.checkHeader(header));
+        VerifyUtils.True("Checking if user can see header", dashboardPage.checkHeader(header));
     }
 
     @And("^show the below elements$")
     public void show_the_below_elements(DataTable dataTable) throws Throwable {
         Map<String, String> data = dataTable.asMap(String.class,String.class);
-        homePage.checkElements(data);
+        dashboardPage.checkElements(data);
 
     }
 
     @Then("^a header with name \"(.*?)\"$")
     public void a_header_with_name(String header) throws Throwable {
-        VerifyUtils.True("Checking the header is "+header,homePage.getHeader(header));
+        VerifyUtils.True("Checking the header is "+header, dashboardPage.getHeader(header));
     }
 
     @Then("^a button with name \"(.*?)\" is shown$")
     public void a_button_with_name_is_shown(String buttontext) throws Throwable {
 
-        VerifyUtils.True("Checking the button with text is "+buttontext,homePage.getButton(buttontext));
+        VerifyUtils.True("Checking the button with text is "+buttontext, dashboardPage.getButton(buttontext));
     }
 
     @When("^(?:open|close) the ham burger menu$")
     public void open_the_ham_burger_menu() throws Throwable {
-        homePage = new HomePage();
-        homePage.openHamBurgerMenu();
+        dashboardPage = new DashboardPage();
+        dashboardPage.openHamBurgerMenu();
 
     }
 
     @Then("^I should see the following option$")
     public void I_should_see_the_following_option(DataTable dataTable) throws Throwable {
         Map<String, String> data = dataTable.asMap(String.class,String.class);
-        homePage.checkElements(data);
+        dashboardPage.checkElements(data);
     }
 
     @When("^he open an all the shops$")
     public void he_open_an_all_the_shops() throws Throwable {
-        homePage = new HomePage();
-        homePage.openAllShops();
+        dashboardPage = new DashboardPage();
+        dashboardPage.openAllShops();
 
     }
 
@@ -137,27 +136,27 @@ public class FuncStepDef {
     @Then("^the branch \"(.*?)\" should be shown$")
     public void he_the_branch_should_be_shown(String branch) throws Throwable {
 
-        homePage.checkBranchIsShown(branch);
+        dashboardPage.checkBranchIsShown(branch);
         this.branch = branch;
     }
 
     @Then("^he opens the branch$")
     public void he_opens_the_branch() throws Throwable {
-        homePage.openTheBranch(branch);
+        dashboardPage.openTheBranch(branch);
 
     }
 
     @Then("^the details of the branch should be shown$")
     public void the_details_of_the_branch_should_be_shown() throws Throwable {
 
-        homePage.checkBranchText(branch);
+        dashboardPage.checkBranchText(branch);
     }
 
     @Given("^user is in home page$")
     public void user_is_in_home_page() throws Throwable {
 
-        homePage = new HomePage();
-        homePage.checkHeader("MATCHESFASHION.COM");
+        dashboardPage = new DashboardPage();
+        dashboardPage.checkHeader("MATCHESFASHION.COM");
 
     }
 
@@ -165,8 +164,8 @@ public class FuncStepDef {
     public void I_search_for(String searchKeyword) throws Throwable {
 
         logger.log(LogStatus.INFO,"I search for ", searchKeyword);
-        homePage = new HomePage();
-        homePage.searchWithKeyword(searchKeyword);
+        dashboardPage = new DashboardPage();
+        dashboardPage.searchWithKeyword(searchKeyword);
         Assert.assertFalse(driver.findElement(By.tagName("body")).getText().contains("Sorry, we couldn't find any results matching"));
 
     }
@@ -220,7 +219,7 @@ public class FuncStepDef {
 
     @When("^he navigates to \"([^\"]*)\" section$")
     public void he_navigates_to_section(String navigationLinks) throws Throwable {
-        homePage.openNavigationLinks(navigationLinks);
+        dashboardPage.openNavigationLinks(navigationLinks);
     }
 
     @And("^selects the product with title \"([^\"]*)\"$")
@@ -238,7 +237,7 @@ public class FuncStepDef {
 
     @Then("^opens continue till the payment$")
     public void opens_continue_till_the_payment() throws Throwable {
-        paymentPage = homePage.gotoPaymentScreen();
+        paymentPage = dashboardPage.gotoPaymentScreen();
     }
 
     @And("^pay with a new card$")
@@ -253,6 +252,6 @@ public class FuncStepDef {
 
     @When("^he opens the \"([^\"]*)\" section$")
     public void he_opens_the_section(String link) throws Throwable {
-        homePage.openurl(link);
+        dashboardPage.openurl(link);
     }
 }

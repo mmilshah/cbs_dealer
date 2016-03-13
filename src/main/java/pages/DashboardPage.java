@@ -1,6 +1,6 @@
 package pages;
 
-import Utils.Utils;
+import Utils.CommonUtils;
 import Utils.VerifyUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -16,9 +16,9 @@ import java.util.List;
 /**
  * Created by sriramangajala on 02/07/15.
  */
-public class HomePage extends BasePage {
+public class DashboardPage extends BasePage {
 
-    static Logger LOGGER = Logger.getLogger(HomePage.class);
+    static Logger LOGGER = Logger.getLogger(DashboardPage.class);
     PaymentPage paymentPage;
 
 
@@ -48,12 +48,10 @@ public class HomePage extends BasePage {
 
 
 
-    public HomePage() {
+    public DashboardPage() {
 
         PageFactory.initElements(driver, this);
-        Utils.waitElementPresent(By.className("men"));
-        if (!driver.findElement(By.className("men")).isDisplayed())
-            throw new RuntimeException("No home page shown");
+
     }
 
 
@@ -100,13 +98,13 @@ public class HomePage extends BasePage {
 
     public void openAllShops() {
         shop_button.click();
-        Utils.sleep(3);
+        CommonUtils.sleep(3);
         Show_all_shops.click();
 
     }
 
     public void checkBranchIsShown(String branch) {
-        VerifyUtils.True("Checking that the branch " + branch + " is available", Utils.isElementPresent(By.linkText(branch)));
+        VerifyUtils.True("Checking that the branch " + branch + " is available", CommonUtils.isElementPresent(By.linkText(branch)));
     }
 
     public void openTheBranch(String branch) {
@@ -114,7 +112,7 @@ public class HomePage extends BasePage {
     }
 
     public void checkBranchText(String branch) {
-        VerifyUtils.ContainsTrue("Checking the branch details are shown " + branch, Utils.getVisibleText(), "John Lewis " + branch);
+        VerifyUtils.ContainsTrue("Checking the branch details are shown " + branch, CommonUtils.getVisibleText(), "John Lewis " + branch);
     }
 
 
@@ -123,12 +121,12 @@ public class HomePage extends BasePage {
         //click on search icon
         search_button.click();
         //enter the product name
-        Utils.sleep(2);
+        CommonUtils.sleep(2);
 
         keyword_input_textbox.clear();
         keyword_input_textbox.sendKeys(keyword);
 
-        Utils.sleep(1);
+        CommonUtils.sleep(1);
         //click on search button
         keyword_input_textbox.sendKeys(Keys.ENTER.toString());
     }
@@ -140,5 +138,16 @@ public class HomePage extends BasePage {
         paymentPage = new PaymentPage();
         paymentPage.login();
         return paymentPage;
+    }
+
+    public void navigate(String page) {
+
+        String[] links = page.split("-");
+        String mainLink = links[0].trim();
+        String subLink = links[1].trim();
+
+        driver.findElement(By.linkText(mainLink)).click();
+        CommonUtils.sleep(3);
+        driver.findElement(By.linkText(subLink)).click();
     }
 }

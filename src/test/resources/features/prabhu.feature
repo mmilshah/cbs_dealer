@@ -1,4 +1,0 @@
-Feature: Prabhy
-
-  Scenario: Registar
-

@@ -2,8 +2,9 @@ package pages;
 
 import Utils.AutomationConstants;
 import Utils.BrowserFactory;
-import Utils.Utils;
+import Utils.CommonUtils;
 import Utils.VerifyUtils;
+import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -53,7 +54,7 @@ public class BasePage {
         for (String link : navigationLinks.split(">")) {
             VerifyUtils.Info("Opening the link" + link);
             try {
-                Utils.waitElementPresent(By.linkText(link));
+                CommonUtils.waitElementPresent(By.linkText(link));
                 driver.findElement(By.linkText(link)).click();
             }
                 catch(NoSuchElementException e)
@@ -66,5 +67,9 @@ public class BasePage {
     public void openurl(String url) {
         if(url.equalsIgnoreCase("men"))
             driver.get(AutomationConstants.URL+"/mens");
+    }
+
+    public void checkTitle(String title) {
+        Assert.assertTrue(driver.getTitle().contains(title));
     }
 }

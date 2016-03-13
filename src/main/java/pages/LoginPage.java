@@ -1,6 +1,9 @@
 package pages;
 
+import Utils.CommonUtils;
+import junit.framework.Assert;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -36,19 +39,27 @@ public class LoginPage extends BasePage {
     public LoginPage() {
 
         PageFactory.initElements(driver, this);
-        driver.navigate().refresh();
-        if (!id_username.isDisplayed())
-            throw new RuntimeException("Unable to see login");
     }
 
 
-    public HomePage login(String username, String password) {
+    public DashboardPage login(String username, String password) {
         id_username.sendKeys(username);
         id_password.sendKeys(password);
         signIn.click();
 
-        return new HomePage();
+        return new DashboardPage();
 
+    }
+
+
+
+    public DashboardPage loginHBL(String username,String password)
+    {
+        driver.findElement(By.id("UserName")).sendKeys(username);
+        driver.findElement(By.id("Password")).sendKeys(password);
+        driver.findElement(By.className("login_submit")).click();
+        Assert.assertTrue(CommonUtils.isTextPresent("Welcome to Administration Module"));
+        return new DashboardPage();
     }
 }
 

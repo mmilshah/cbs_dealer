@@ -2,26 +2,25 @@ package features;
 
 import Utils.AutomationConstants;
 import Utils.BrowserFactory;
-import Utils.Utils;
+import Utils.CommonUtils;
 import Utils.CreatePrettyReport;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.DriverCommand;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(Cucumber.class)
 @Cucumber.Options(format = {"pretty","html:target/whisper-html-report","json:target/whisper_report.json"},
-tags = {"@run"}
+tags = {"@prod"}
 )
 public class RunTest{
     static WebDriver driver;
@@ -33,8 +32,10 @@ public class RunTest{
     {
         try {
             BrowserFactory.StartBrowser(AutomationConstants.BROWSER_TYPE, AutomationConstants.URL);
-           // Utils.setTestEnv(AutomationConstants.TEST_ENV,AutomationConstants.CHECKOUT_NEW_OLD);
             driver = BrowserFactory.driver;
+            driver.manage().timeouts().implicitlyWait(AutomationConstants.MAX_TIMEOUTS, TimeUnit.SECONDS);
+            Assert.assertTrue(CommonUtils.isTextPresent("Admin Login"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,10 +44,7 @@ public class RunTest{
             generatePrettyReportOnTheGo();
 
         addShutdownHook();
-
-
     }
-
 
     @AfterClass
     public static void stop()

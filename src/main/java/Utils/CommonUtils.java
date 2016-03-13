@@ -2,20 +2,17 @@ package Utils;
 
 
 import org.apache.log4j.Logger;
-import org.junit.rules.Timeout;
-import org.omg.CORBA.TIMEOUT;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Utils {
+public class CommonUtils {
     protected static WebDriver driver = BrowserFactory.getDriver();
     private static WebDriverWait wait = new WebDriverWait(driver, 30);
-    static Logger LOGGER = Logger.getLogger(Utils.class);
+    static Logger LOGGER = Logger.getLogger(CommonUtils.class);
 
     public static void selectFromDropDown(By by, String text) {
         Select sel = new Select(driver.findElement(by));
