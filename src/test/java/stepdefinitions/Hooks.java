@@ -1,7 +1,7 @@
 package stepdefinitions;
 
-import Utils.AutomationConstants;
-import Utils.BrowserFactory;
+import utils.AutomationConstants;
+import utils.BrowserFactory;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import org.apache.log4j.Logger;
@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriverException;
 import java.net.MalformedURLException;
 
 public class Hooks {
+
     public static WebDriver driver;
     private static final Logger LOGGER = Logger.getLogger(BrowserFactory.class);
 
@@ -32,7 +33,6 @@ public class Hooks {
         driver.quit();
         driver = null;
     }
-
 
     @After
     /**

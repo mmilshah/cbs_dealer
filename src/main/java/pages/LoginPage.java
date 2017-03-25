@@ -1,6 +1,6 @@
 package pages;
 
-import Utils.CommonUtils;
+import utils.CommonUtils;
 import junit.framework.Assert;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;

@@ -1,12 +1,11 @@
 package features;
 
-import Utils.AutomationConstants;
-import Utils.BrowserFactory;
-import Utils.CommonUtils;
-import Utils.CreatePrettyReport;
+import utils.AutomationConstants;
+import utils.BrowserFactory;
+import utils.CreatePrettyReport;
+import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.*;
@@ -19,8 +18,8 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(format = {"pretty","html:target/whisper-html-report","json:target/whisper_report.json"},
-tags = {"@prod"}
+@CucumberOptions(plugin = {"pretty","html:target/whisper-html-report","json:target/whisper_report.json"},
+tags = {"@test"}
 )
 public class RunTest{
     static WebDriver driver;
@@ -34,7 +33,7 @@ public class RunTest{
             BrowserFactory.StartBrowser(AutomationConstants.BROWSER_TYPE, AutomationConstants.URL);
             driver = BrowserFactory.driver;
             driver.manage().timeouts().implicitlyWait(AutomationConstants.MAX_TIMEOUTS, TimeUnit.SECONDS);
-            Assert.assertTrue(CommonUtils.isTextPresent("Admin Login"));
+//            Assert.assertTrue(CommonUtils.isTextPresent("Admin Login"));
 
         } catch (Exception e) {
             e.printStackTrace();

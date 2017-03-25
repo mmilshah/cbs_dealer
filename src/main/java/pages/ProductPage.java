@@ -1,16 +1,11 @@
 package pages;
 
-import Utils.AutomationConstants;
-import Utils.CommonUtils;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.ExplicitGroup;
+import utils.CommonUtils;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by sriramangajala on 11/12/15.

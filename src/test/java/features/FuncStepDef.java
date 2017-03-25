@@ -1,8 +1,9 @@
 package features;
 
-import Utils.AutomationConstants;
-import Utils.BrowserFactory;
-import Utils.VerifyUtils;
+import cucumber.api.PendingException;
+import utils.AutomationConstants;
+import utils.BrowserFactory;
+import utils.VerifyUtils;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -37,6 +38,8 @@ public class FuncStepDef {
     ListOfProducts listOfProducts;
     ProductPage productPage;
     PaymentPage paymentPage;
+    public MapLogin mapLogin;
+    public HomePage homePage;
 
 
 
@@ -254,4 +257,46 @@ public class FuncStepDef {
     public void he_opens_the_section(String link) throws Throwable {
         dashboardPage.openurl(link);
     }
+
+    @Given("^user is logged in$")
+    public void user_is_logged_in() throws Throwable {
+
+    }
+
+    @Given("^user logged in with \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void user_logged_in_with_and(String username, String password) throws Throwable {
+
+        System.out.println(username + password);
+
+        mapLogin = new MapLogin();
+
+        homePage = mapLogin.loginToApplication(username,password);
+
+
+    }
+
+    @Then("^he should be in home page$")
+    public void he_should_be_in_home_page() throws Throwable {
+
+        homePage.checkUserIsInHomePage();
+
+    }
+
+//    @Then("^i enter integer (\\d+)$")
+//    public void i_enter_integer(int arg1) throws Throwable {
+//
+//    }
+
+    @Then("^i enter integer \"(\\d+)\"$")
+    public void i_enter_integer(int arg1) throws Throwable {
+
+    }
+
+    @When("^he search for a \"([^\"]*)\" address$")
+    public void he_search_for_a_address(String text) throws Throwable {
+
+        homePage.searchForText(text);
+    }
+
+
 }

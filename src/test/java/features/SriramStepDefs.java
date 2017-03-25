@@ -1,11 +1,9 @@
 package features;
 
-import Utils.AutomationConstants;
-import Utils.BrowserFactory;
+import utils.AutomationConstants;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.WebDriver;
 import pages.DashboardPage;
 import pages.LoginPage;
 import pages.ProductPage;

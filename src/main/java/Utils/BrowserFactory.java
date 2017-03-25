@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
@@ -71,7 +71,7 @@ protected static WebDriver startRemoteWebBrowser(String browser,String URL)
             if(System.getProperty("Browser").equalsIgnoreCase("firefox"))
             {
                 System.out.println("grid firefox started...");
-                capabilities = DesiredCapabilities.chrome();
+                capabilities = DesiredCapabilities.firefox();
                 capabilities.setVersion("34.0");
             }
             else if(System.getProperty("Browser").equalsIgnoreCase("chrome"))
@@ -113,7 +113,7 @@ protected static WebDriver startRemoteWebBrowser(String browser,String URL)
                 System.out.println("local chrome started...");
                 //System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
               //  driver=new ChromeDriver();
-                System.setProperty("webdriver.chrome.driver", "\\Users\\bijojosephbj\\Desktop\\Automation\\Chromeexe/\\chromedriver");
+                System.setProperty("webdriver.chrome.driver", "/Users/sriramangajala/eurostar/test_automation/csb_dealer_automation/chromedriver");
 			       driver=new ChromeDriver();
             }
             else

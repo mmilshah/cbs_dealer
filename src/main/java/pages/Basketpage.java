@@ -1,6 +1,6 @@
 package pages;
 
-import Utils.VerifyUtils;
+import utils.VerifyUtils;
 import org.openqa.selenium.By;
 
 /**

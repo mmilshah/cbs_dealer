@@ -1,7 +1,7 @@
 package pages;
 
-import Utils.CommonUtils;
-import Utils.VerifyUtils;
+import utils.CommonUtils;
+import utils.VerifyUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

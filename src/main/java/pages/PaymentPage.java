@@ -1,8 +1,8 @@
 package pages;
 
-import Utils.AutomationConstants;
-import Utils.CommonUtils;
-import Utils.VerifyUtils;
+import utils.AutomationConstants;
+import utils.CommonUtils;
+import utils.VerifyUtils;
 import org.openqa.selenium.By;
 
 /**

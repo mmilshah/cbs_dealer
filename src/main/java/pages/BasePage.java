@@ -1,9 +1,9 @@
 package pages;
 
-import Utils.AutomationConstants;
-import Utils.BrowserFactory;
-import Utils.CommonUtils;
-import Utils.VerifyUtils;
+import utils.AutomationConstants;
+import utils.BrowserFactory;
+import utils.CommonUtils;
+import utils.VerifyUtils;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by sriramangajala on 01/07/15.
  */
-public class BasePage {
+public abstract class BasePage implements pages.Page {
 
     WebDriver driver = BrowserFactory.getDriver();
 
@@ -66,10 +66,16 @@ public class BasePage {
 
     public void openurl(String url) {
         if(url.equalsIgnoreCase("men"))
-            driver.get(AutomationConstants.URL+"/mens");
+            driver.get(AutomationConstants.URL+"/");
     }
 
     public void checkTitle(String title) {
         Assert.assertTrue(driver.getTitle().contains(title));
     }
+
+    public void loginOut(){
+
+    }
+
+
 }
